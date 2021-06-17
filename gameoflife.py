@@ -11,30 +11,9 @@ import os
 # Get the number of living neighbors for a cell
 def neighbors(squares, i, j):
 	n = 0
-	if i - 1 >= 0 and j - 1 >= 0 and squares[i - 1][j - 1] :
-		n += 1
-	
-	if j - 1 >= 0 and squares[i][j - 1]:
-		n += 1
-	
-	if i + 1 < len(squares) and j - 1 >= 0 and squares[i + 1][j - 1]:
-		n += 1
-	
-	if i + 1 < len(squares) and squares[i + 1][j]:
-		n += 1
-
-	if i + 1 < len(squares) and j + 1 < len(squares[0]) and squares[i + 1][j + 1]:
-		n += 1
-	
-	if j + 1 < len(squares[0]) and squares[i][j + 1]:
-		n += 1
-	
-	if i - 1 >= 0 and j + 1 < len(squares[0]) and squares[i - 1][j + 1]:
-		n += 1
-
-	if i - 1 >= 0 and squares[i - 1][j]:
-		n += 1
-	
+	for a in range(i-1, i+2):
+		for b in range(j-1, j+2):
+			n += squares[a%len(squares)][b%len(squares[0])]
 	return n
 
 # Process game of life rules
@@ -43,7 +22,7 @@ def process(squares):
 	for i in range(len(squares)):
 		for j in range(len(squares[0])):
 			num_neighbors = neighbors(squares, i, j)
-			if squares[i][j] == True and num_neighbors != 2 and num_neighbors != 3:
+			if squares[i][j] and num_neighbors != 3 and num_neighbors != 4:
 				new_squares[i][j] = False
 			if num_neighbors == 3 and not squares[i][j]:
 				new_squares[i][j] = True
