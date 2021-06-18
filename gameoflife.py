@@ -124,9 +124,6 @@ if args.file:
 			if file_lines[i][j] == "\n": continue
 			squares[j][i] = bool(int(file_lines[i][j]))
 
-# Squares for the quick save
-saved_squares = [ [0] * num_y for _ in range(num_x)]
-
 # Define the screen surface
 screen = pygame.display.set_mode((width, height))
 
@@ -171,14 +168,6 @@ while True:
 			# Toggle gridlines
 			if event.key == pygame.K_g:
 				gridlines = not gridlines
-			
-			# Quick save
-			if event.key == pygame.K_s:
-				saved_squares = copy.deepcopy(squares)
-
-			# Quick load
-			if event.key == pygame.K_l:
-				squares = copy.deepcopy(saved_squares)
 
 			# Export
 			if event.key == pygame.K_e:
